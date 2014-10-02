@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
@@ -13,6 +14,7 @@ namespace LoaderImageView
         private Context _context;
         private ProgressBar _progressBar;
         private ImageView _imageView;
+        public const int WAIT_FOR_IMAGEEXISTS = 3;
 
         protected LoaderImageView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
@@ -97,10 +99,12 @@ namespace LoaderImageView
             _imageView.SetImageResource(resourceID);
         }
 
-        public void SetLocalImage(string path)
+        public async void SetLocalImage(string path)
         {
             ShowProgressBar();
-            
+
+            await Task.Delay(WAIT_FOR_IMAGEEXISTS);
+
             if (File.Exists(path))
                 _imageView.SetImageFromFile(path);
             else
