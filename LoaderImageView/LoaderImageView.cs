@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
@@ -87,6 +88,25 @@ namespace LoaderImageView
             _imageView.LayoutParameters.Width = ViewGroup.LayoutParams.MatchParent;
             _imageView.LayoutParameters.Height = ViewGroup.LayoutParams.MatchParent;
             _progressBar.Visibility = ViewStates.Visible;
+        }
+
+        public void SetDefalutImage(int resourceID = Android.Resource.Drawable.IcMenuGallery)
+        {
+            _imageView.LayoutParameters.Width = ViewGroup.LayoutParams.WrapContent;
+            _imageView.LayoutParameters.Height = ViewGroup.LayoutParams.WrapContent;
+            _imageView.SetImageResource(resourceID);
+        }
+
+        public void SetLocalImage(string path)
+        {
+            ShowProgressBar();
+            
+            if (File.Exists(path))
+                _imageView.SetImageFromFile(path);
+            else
+                SetDefalutImage();
+
+            ShowImage();
         }
     }
 }
