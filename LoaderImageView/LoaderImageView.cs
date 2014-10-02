@@ -50,6 +50,29 @@ namespace LoaderImageView
 
             AddView(_progressBar);
             AddView(_imageView);
+
+            SetProgressBarLayoutParams(LayoutRules.CenterInParent);
+            SetImageViewScaleType(ImageView.ScaleType.CenterCrop);
+            SetImageViewLayoutParams(LayoutRules.CenterInParent);
+        }
+
+        public void SetImageViewScaleType(ImageView.ScaleType scaleType)
+        {
+            _imageView.SetScaleType(scaleType);
+        }
+
+        public void SetImageViewLayoutParams(LayoutRules layoutRules)
+        {
+            var imageLayoutParams = (LayoutParams)_imageView.LayoutParameters;
+            imageLayoutParams.AddRule(layoutRules);
+            _imageView.LayoutParameters = imageLayoutParams;
+        }
+
+        public void SetProgressBarLayoutParams(LayoutRules layoutRules)
+        {
+            var progressLayoutParams = (LayoutParams)_progressBar.LayoutParameters;
+            progressLayoutParams.AddRule(layoutRules);
+            _progressBar.LayoutParameters = progressLayoutParams;
         }
     }
 }
