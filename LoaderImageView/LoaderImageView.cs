@@ -74,5 +74,19 @@ namespace LoaderImageView
             progressLayoutParams.AddRule(layoutRules);
             _progressBar.LayoutParameters = progressLayoutParams;
         }
+
+        private void ShowImage()
+        {
+            _progressBar.Visibility = ViewStates.Gone;
+            _imageView.Visibility = ViewStates.Visible;
+        }
+
+        private void ShowProgressBar()
+        {
+            _imageView.Visibility = ViewStates.Invisible;
+            _imageView.LayoutParameters.Width = ViewGroup.LayoutParams.MatchParent;
+            _imageView.LayoutParameters.Height = ViewGroup.LayoutParams.MatchParent;
+            _progressBar.Visibility = ViewStates.Visible;
+        }
     }
 }
